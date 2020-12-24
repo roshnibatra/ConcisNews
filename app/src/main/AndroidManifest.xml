@@ -8,9 +8,10 @@
         android:allowBackup="true"
         android:icon="@drawable/concis_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/concis_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.WebViewActivity"></activity>
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.SignInActivity" />
         <activity android:name=".activity.MainActivity" />

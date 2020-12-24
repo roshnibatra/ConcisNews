@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.android.concisnews.fragments.CategoryFragment;
 import com.example.android.concisnews.fragments.NewsFragment;
-import com.example.android.concisnews.fragments.NewsWebView;
+import com.example.android.concisnews.fragments.ProfileFragment;
 
 public class PagerFragmentAdapter extends FragmentPagerAdapter {
     private static int NUM_ITEMS = 3;
@@ -25,7 +25,7 @@ public class PagerFragmentAdapter extends FragmentPagerAdapter {
             case 1: // Fragment # 0 - This will show FirstFragment different title
                 return NewsFragment.newInstance();
             case 2: // Fragment # 0 - This will show FirstFragment different title
-                return NewsWebView.newInstance();
+                return ProfileFragment.newInstance();
 
             default:
                 return null;

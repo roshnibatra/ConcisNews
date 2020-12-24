@@ -1,6 +1,10 @@
 package com.example.android.concisnews.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +24,8 @@ import com.example.android.concisnews.Adapters.RecyclerViewAdapter;
 import com.example.android.concisnews.Dtos.News;
 import com.example.android.concisnews.Dtos.SourceDto;
 import com.example.android.concisnews.R;
+import com.example.android.concisnews.activity.WebViewActivity;
+import com.example.android.concisnews.apiInterface.FragmentInterface;
 import com.example.android.concisnews.apiInterface.RetrofitApi;
 import com.example.android.concisnews.retrofitInstance.RetrofitClientInstance;
 
@@ -34,6 +42,7 @@ import retrofit2.Response;
  */
 public class NewsFragment extends Fragment {
 
+    private static final String TAG = "NewsFragment";
     RecyclerView recyclerView;
     RecyclerViewAdapter recyclerViewAdapter;
     List<News> newsList;
@@ -75,28 +84,28 @@ public class NewsFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext()
                 ,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),newsList);
+        recyclerViewAdapter = new RecyclerViewAdapter(getContext(),newsList, fragmentInterface);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         LinearSnapHelper linearSnapHelper = new SnapHelperOneByOne();
         linearSnapHelper.attachToRecyclerView(recyclerView);
 
         RetrofitApi retrofitApi = RetrofitClientInstance.getRetrofitInstance().create(RetrofitApi.class);
-        Call<SourceDto> call = retrofitApi.getNews();
-        call.enqueue(new Callback<SourceDto>() {
+        Call<List<News>> call = retrofitApi.getNews();
+        call.enqueue(new Callback<List<News>>() {
             @Override
-            public void onResponse(Call<SourceDto> call, Response<SourceDto> response) {
+            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
                 if(response.isSuccessful()) {
                     animationView.setVisibility(View.GONE);
                  //   progressBar.setVisibility(View.GONE);
-                    SourceDto sourceDto = response.body();
-                    recyclerViewAdapter.setNewsList(sourceDto.getArticles());
+                    List<News> news = response.body();
+                    recyclerViewAdapter.setNewsList(news);
                 }
 
             }
 
             @Override
-            public void onFailure(Call<SourceDto> call, Throwable t) {
+            public void onFailure(Call<List<News>> call, Throwable t) {
                 t.printStackTrace();
             }
         });
@@ -125,4 +134,13 @@ public class NewsFragment extends Fragment {
             return currentPosition;
         }
     }
+
+    FragmentInterface fragmentInterface = new FragmentInterface() {
+        @Override
+        public void sentUrl(String url) {
+            Log.i(TAG, "get sentUrl: " + url);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        }
+    };
 }

@@ -7,51 +7,49 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="338dp"
-        android:layout_height="290dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="127dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/background_connection" />
+        app:srcCompat="@drawable/concis_logo" />
 
     <TextView
         android:id="@+id/people"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginEnd="293dp"
-        android:layout_marginRight="293dp"
-        android:text="Concis"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="CONCIS"
         android:textColor="#CD2652"
-        android:textSize="30sp"
+        android:textSize="44sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.006" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="406dp"
+        android:layout_height="261dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="229dp"
-        android:layout_height="98dp"
-        android:layout_marginTop="72dp"
-        android:text="Easiest way to be linked "
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/people"
-        app:layout_constraintTop_toBottomOf="@+id/people" />
+        app:layout_constraintVertical_bias="0.678"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/frontpage" />
 
     <Button
         android:id="@+id/register"
         android:layout_width="152dp"
         android:layout_height="49dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/button_shape"
         android:text="Sign In"
         android:textColor="#CD2652"
@@ -60,14 +58,13 @@
         app:layout_constraintEnd_toStartOf="@+id/sign_in_down"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintTop_toBottomOf="@+id/people"
+        app:layout_constraintVertical_bias="0.9" />
 
     <Button
         android:id="@+id/sign_in_down"
         android:layout_width="148dp"
         android:layout_height="49dp"
-        android:layout_marginTop="80dp"
         android:background="@drawable/button_shape"
         android:text="Register"
         android:textColor="#CD2652"
@@ -75,8 +72,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/register"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.812" />
+        app:layout_constraintTop_toBottomOf="@+id/people"
+        app:layout_constraintVertical_bias="0.9" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

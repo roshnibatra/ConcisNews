@@ -4,17 +4,29 @@ package com.example.android.concisnews.Dtos;
 public class News {
 
     int id;
-    String title;
-    String content;
-    String url;
-    String urlToImage;
+    String slug;
+    Rendered excerpt;
+    String link;
+    Rendered title;
+    Category Categories;
+    Image better_featured_image;
 
-    public News(int id, String title, String content, String url, String urlToImage) {
+    public News(int id, String slug, Rendered content, String link, Rendered title, Category categories, Image better_featured_image) {
         this.id = id;
+        this.slug = slug;
+        this.excerpt = content;
+        this.link = link;
         this.title = title;
-        this.content = content;
-        this.url = url;
-        this.urlToImage = urlToImage;
+        Categories = categories;
+        this.better_featured_image = better_featured_image;
+    }
+
+    public Rendered getTitle() {
+        return title;
+    }
+
+    public void setTitle(Rendered title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -25,35 +37,43 @@ public class News {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getSlug() {
+        return slug;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setSlug(String slug) {
+        this.slug = slug;
     }
 
-    public String getContent() {
-        return content;
+    public Rendered getExcerpt() {
+        return excerpt;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setExcerpt(Rendered content) {
+        this.excerpt = content;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLink() {
+        return link;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(String link) {
+        this.link = link;
     }
 
-    public String getUrlToImage() {
-        return urlToImage;
+    public Category getCategories() {
+        return Categories;
     }
 
-    public void setUrlToImage(String urlToImage) {
-        this.urlToImage = urlToImage;
+    public void setCategories(Category categories) {
+        Categories = categories;
+    }
+
+    public Image getBetter_featured_image() {
+        return better_featured_image;
+    }
+
+    public void setBetter_featured_image(Image better_featured_image) {
+        this.better_featured_image = better_featured_image;
     }
 }

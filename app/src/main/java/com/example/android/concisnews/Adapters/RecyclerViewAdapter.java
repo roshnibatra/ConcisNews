@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.concisnews.Dtos.News;
 import com.example.android.concisnews.R;
 import com.example.android.concisnews.activity.MainActivity;
+import com.example.android.concisnews.apiInterface.FragmentInterface;
 
 import java.io.InputStream;
 import java.util.List;
@@ -28,10 +30,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private List<News> newsList;
     Context context;
+    private FragmentInterface mFragmentInterface;
 
-    public RecyclerViewAdapter(Context context,List<News> newsList) {
+    public RecyclerViewAdapter(Context context,List<News> newsList, FragmentInterface i) {
         this.context = context;
         this.newsList = newsList;
+        mFragmentInterface = i;
     }
 
     public void setNewsList(List<News> news) {
@@ -44,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recycler_content, parent, false);
 
-        return new NewsViewHolder(view);
+        return new NewsViewHolder(view, mFragmentInterface);
     }
 
     @Override
@@ -52,13 +56,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         News newsData = newsList.get(position);
         if(newsData != null) {
             new DownloadImageTask(holder.image)
-                    .execute(newsData.getUrlToImage());
-            holder.title.setText(newsData.getTitle());
-            holder.content.setText(newsData.getContent());
-            holder.url.setText(newsData.getUrl());
+                    .execute(newsData.getBetter_featured_image().getSource_url());
+            holder.title.setText(newsData.getTitle().getRendered());
+            holder.content.setText(newsData.getExcerpt().getRendered());
         }
-
-
     }
 
     @Override
@@ -66,19 +67,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return newsList != null ? newsList.size() : 0;
     }
 
-    class NewsViewHolder extends RecyclerView.ViewHolder {
+    public class NewsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView title, content;
         TextView url;
         ImageView image;
         ImageButton share;
+        FragmentInterface fragmentInterface;
 
-        public NewsViewHolder(@NonNull View itemView) {
+        public NewsViewHolder(@NonNull View itemView, FragmentInterface f) {
             super(itemView);
 
+            fragmentInterface = f;
             title = itemView.findViewById(R.id.title_news);
             content = itemView.findViewById(R.id.content_news);
             url = itemView.findViewById(R.id.hyperlink_news);
-            Linkify.addLinks(url, Linkify.ALL);
             image = itemView.findViewById(R.id.image_news);
             share = itemView.findViewById(R.id.share_news);
             share.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +96,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     }
                 }
             });
+            url.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            fragmentInterface.sentUrl(newsList.get(getAdapterPosition()).getLink());
         }
     }
 
