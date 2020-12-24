@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/images" />
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:padding="12dp"
             android:text="Heading for the news"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/content_news"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_weight="1"
-            android:padding="12dp"
+            android:padding="16dp"
             android:text="News description in brief"
             android:textSize="14sp" />
 
@@ -62,9 +62,9 @@
                 android:clickable="true"
                 android:autoLink="web"
                 android:layout_margin="10dp"
-                android:text="Tap to read more about the story"
+                android:text="TAP TO READ MORE"
                 android:textColor="#2222a1"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:focusable="true" />
 
             <ImageButton
