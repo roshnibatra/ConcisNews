@@ -3,4 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_News_fragment">Hello News fragment</string>
+
+    <string-array name="planets_array">
+        <item>Asia</item>
+        <item>Europe</item>
+        <item>Uae</item>
+        <item>Usa</item>
+
+    </string-array>
 </resources>

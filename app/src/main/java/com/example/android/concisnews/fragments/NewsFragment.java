@@ -3,28 +3,20 @@ package com.example.android.concisnews.fragments;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.android.concisnews.Adapters.RecyclerViewAdapter;
 import com.example.android.concisnews.Dtos.News;
-import com.example.android.concisnews.Dtos.SourceDto;
 import com.example.android.concisnews.R;
-import com.example.android.concisnews.activity.WebViewActivity;
 import com.example.android.concisnews.apiInterface.FragmentInterface;
 import com.example.android.concisnews.apiInterface.RetrofitApi;
 import com.example.android.concisnews.retrofitInstance.RetrofitClientInstance;

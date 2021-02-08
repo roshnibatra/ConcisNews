@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<News> newsList;
     Context context;
     private FragmentInterface mFragmentInterface;
+    boolean isImageFitToScreen;
 
     public RecyclerViewAdapter(Context context,List<News> newsList, FragmentInterface i) {
         this.context = context;
@@ -82,14 +84,32 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             content = itemView.findViewById(R.id.content_news);
             url = itemView.findViewById(R.id.hyperlink_news);
             image = itemView.findViewById(R.id.image_news);
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(isImageFitToScreen) {
+                        isImageFitToScreen=false;
+                        image.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                        image.setAdjustViewBounds(true);
+//                        zoomImageFromThumb(image, R.drawable.);
+                        
+                    }else{
+                        isImageFitToScreen=true;
+                        image.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+                        image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                    }
+                }
+            });
             share = itemView.findViewById(R.id.share_news);
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                        shareIntent.setType("text/html");
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, title.getText());
+                        shareIntent.setType("text/text");
+                        shareIntent.putExtra(Intent.EXTRA_SUBJECT, title.getText());
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, url.getText());
+                        Log.d("Main",url.toString());
                         context.startActivity(Intent.createChooser(shareIntent, "Shared via Concis"));
                     } catch(Exception e) {
                         e.printStackTrace();
@@ -102,6 +122,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View v) {
             fragmentInterface.sentUrl(newsList.get(getAdapterPosition()).getLink());
+        }
+
+        public void zoomImageFromThumb() {
+
         }
     }
 
@@ -129,4 +153,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             bmImage.setImageBitmap(result);
         }
     }
+    
+    
 }
